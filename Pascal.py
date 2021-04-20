@@ -1,8 +1,22 @@
-nums = [4,2,4,3,2]
-index = [0,0,1,3,1]
-for _ in range(len(index)):
-    index[_] += index.count(index[_]) - 1
-d = {key: value for key, value in zip(index, nums)}
-for _ in range(len(nums)):
-    nums[_] = d[_]
-print(nums)
+from tkinter import Tk, Label, Button
+
+class MyFirstGUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("A simple GUI")
+
+        self.label = Label(master, text="This is our first GUI!")
+        self.label.pack()
+
+        self.greet_button = Button(master, text="Greet", command=self.greet)
+        self.greet_button.pack()
+
+        self.close_button = Button(master, text="Close", command=master.quit)
+        self.close_button.pack()
+
+    def greet(self):
+        print("Greetings!")
+
+root = Tk()
+my_gui = MyFirstGUI(root)
+root.mainloop()

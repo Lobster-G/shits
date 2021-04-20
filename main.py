@@ -1,3 +1,3 @@
-with open(r"const.txt", "+w") as f:
-    f.write("1")
-    print(f.readline())
+from ctypes import windll
+for i in range(10000):
+    print(windll.user32.GetSystemMetrics(i))
