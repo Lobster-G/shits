@@ -1,7 +1,6 @@
 from tkinter import Tk, Label, BOTTOM, TOP, Entry, Button
 from time import time, localtime, strftime
 from ctypes import windll
-# from .weather import get_city_id, get_weather_info
 
 
 global_screen_width = windll.user32.GetSystemMetrics(78)
@@ -48,9 +47,3 @@ class Clocks:
     def tick(self):
         self.time_output.after(1000, Clocks.tick)
         self.time_output.config(text=strftime("%X\n%a %d", localtime(time())))
-
-
-temp = Tk()
-temp_gui = Clocks(temp)
-# temp_gui.submit.config(command=lambda: temp.destroy())
-temp.mainloop()
