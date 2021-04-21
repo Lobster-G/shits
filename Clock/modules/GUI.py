@@ -1,5 +1,4 @@
-from tkinter import Tk, Label, BOTTOM, TOP, Entry, Button
-from time import time, localtime, strftime
+from tkinter import Label, BOTTOM, TOP, Entry, Button
 from ctypes import windll
 
 
@@ -43,7 +42,3 @@ class Clocks:
                                     anchor='s')
         self.time_output.pack(side=TOP)
         self.weather_output.pack(side=BOTTOM)
-
-    def tick(self):
-        self.time_output.after(1000, Clocks.tick)
-        self.time_output.config(text=strftime("%X\n%a %d", localtime(time())))

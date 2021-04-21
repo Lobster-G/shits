@@ -32,7 +32,7 @@ def get_city_id(city: str, _api_key=api_key):
     return data['list'][0]['id']
 
 
-def get_weather_info(city_id, _api_key=api_key, component=None):
+def get_weather_info(city_id, component=None, _api_key=api_key,):
     if component is not None:
         component.after(3600000, get_weather_info)
     res = get(
