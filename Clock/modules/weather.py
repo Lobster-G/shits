@@ -17,6 +17,8 @@ class IncorrectAPIKey(Exception):
             return "API key can't be empty"
         elif self.attrs[0] == "<Response [401]>":
             return f"incorrect API key '{self.attrs[1]}'"
+        elif len(self.attrs[0]) == 0:
+            return f"incorrect city name '{self.attrs[1]}'"
         else:
             return "something go wrong"
 
@@ -29,6 +31,8 @@ def get_city_id(city: str, _api_key=api_key):
     if res.__str__() == "<Response [401]>":
         raise IncorrectAPIKey(res.__str__(), _api_key)
     data = res.json()
+    if len(data["list"]) == 0:
+        raise IncorrectAPIKey(data["list"], city)
     return data['list'][0]['id']
 
 
