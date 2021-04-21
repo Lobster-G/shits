@@ -1,8 +1,8 @@
 from tkinter import Tk
 from time import strftime, localtime, time
-from Python.Clock.modules.GUI import CityEnter, Clocks
-from Python.Clock.modules.weather import *
-from Python.Clock.modules.data import create_df
+from modules.GUI import CityEnter, Clocks
+from modules.weather import *
+from modules.data import create_df
 
 
 def main():
