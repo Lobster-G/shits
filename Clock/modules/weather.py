@@ -36,26 +36,21 @@ def get_city_id(city: str, _api_key=api_key):
     return data['list'][0]['id']
 
 
-def get_weather_info(city_id, component=None, _api_key=api_key,):
-    if component is not None:
-        component.after(3600000, get_weather_info)
+def get_weather_info(city_id, _api_key=api_key):
     res = get(
         "http://api.openweathermap.org/data/2.5/weather",
         params={'id': city_id, 'units': 'metric', 'lang': 'en', 'APPID': _api_key})
     data = res.json()
     if len(data['weather'][0]['description'].capitalize()) > len("Clear sky"):
-        description = data['weather'][0]['description'].capitalize().split()[0] + \
-                      "\n" + data['weather'][0]['description'].capitalize().split()[1]
+        description = f"{data['weather'][0]['description'].capitalize().split()[0]}" \
+                      f"\n{data['weather'][0]['description'].capitalize().split()[1]}"
+        cur_speed = f"{str(data['wind']['speed'])} m/s"
     else:
         description = data['weather'][0]['description'].capitalize()
+        cur_speed = f"{str(data['wind']['speed'])} m/s\n"
     if data['main']['temp'] > 0:
-        cur_temp = '+' + str(round(data['main']['temp'])) + ' °C'
+        cur_temp = f"+{str(round(data['main']['temp']))} °C"
     else:
-        cur_temp = str(round(data['main']['temp'])) + ' °C'
-    cur_speed = str(data['wind']['speed']) + ' m/s'
-
-    cur_weather = description + '\n' + cur_temp + '\n' + cur_speed
-    if component is not None:
-        component.config(text=cur_weather)
-    else:
-        return data
+        cur_temp = f"{str(round(data['main']['temp']))} °C"
+    cur_weather = f"{description}\n {cur_temp}\n{cur_speed}"
+    return cur_weather

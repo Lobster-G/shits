@@ -5,6 +5,11 @@ from modules.weather import *
 from modules.data import create_df
 
 
+def pack_weather_info(component):
+    component.after(3600000, pack_weather_info)
+    component.config(text=get_weather_info(city_id))
+
+
 def main():
     def tick():
         root.time_output.after(1000, tick)
@@ -13,7 +18,7 @@ def main():
     parent = Tk()
     root = Clocks(parent)
     root.time_output.after_idle(tick)
-    root.weather_output.after_idle(get_weather_info, city_id, root.weather_output)
+    root.weather_output.after_idle(pack_weather_info, root.weather_output)
     parent.mainloop()
 
 
@@ -23,7 +28,7 @@ def get_and_destroy():
         city_id = get_city_id(msg.city_input.get())
     except IncorrectAPIKey as e:
         if len(e.args[1]) > 12:
-            error = "".join([i + "\n" for i in e.__str__().rsplit(maxsplit=1)])
+            error = "".join([f"{i}\n" for i in e.__str__().rsplit(maxsplit=1)])
         else:
             error = e.__str__()
         msg.city_input.delete(0, len(msg.city_input.get()))
@@ -33,7 +38,7 @@ def get_and_destroy():
 
 
 try:
-    with open("data.txt", "r") as f:
+    with open("C:/Projects/Python/Clock/data.txt", "r") as f:
         print()
         city_id = int(f.readline().strip().split()[1])
     main()
