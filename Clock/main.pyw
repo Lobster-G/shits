@@ -2,7 +2,7 @@ from tkinter import Tk
 from time import strftime, localtime, time
 from modules.GUI import CityEnter, Clocks
 from modules.weather import *
-from modules.data import create_df
+from modules.data import create_df, abspath
 
 
 def pack_weather_info(component):
@@ -38,8 +38,7 @@ def get_and_destroy():
 
 
 try:
-    with open("C:/Projects/Python/Clock/data.txt", "r") as f:
-        print()
+    with open(f"{abspath('data.txt')}", "r") as f:
         city_id = int(f.readline().strip().split()[1])
     main()
 except FileNotFoundError:
