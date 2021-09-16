@@ -1,3 +1,6 @@
-from q import *
+from pyautogui import move
+from time import sleep
 
-print(dirname('F:\PyCharm\Projects\python\Pascal.py'))
+sleep(2)
+
+move(0, 50, 1)
