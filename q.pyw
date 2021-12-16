@@ -11,6 +11,12 @@ def is_pecked():
 
 
 def catch():
+    def move_n_click(x: int, y: int, button: str, delay=(0.2, 0.2)):
+        sleep(delay[0])
+        moveTo(x, y)
+        sleep(delay[1])
+        click(button=button)
+
     mouseDown(button="right")
     sleep(0.2)
     mouseDown(button="left")
@@ -33,10 +39,17 @@ def catch():
         moveTo(960, 920)
         sleep(0.2)
         click(button="left")
+        # move_n_click(960, 920, "left")
         sleep(2)
         moveTo(780, 680)
         sleep(0.2)
         click(button="left")
+        # move_n_click(780, 680, "left", (2, 0.2))
+        sleep(2)
+        moveTo(870, 850)
+        sleep(0.2)
+        click(button="left")
+        # move_n_click(870, 850, "left", (2, 0.2))
     else:                                                   # заброс
         mouseDown(button="left")
         sleep(0.2)
@@ -44,8 +57,8 @@ def catch():
         sleep(3)
 
 
-float_col_range = [range(180, 195), range(180, 195), range(180, 195) ]
-cage_col_range = [range(225, 255), range(225, 255), range(225, 255)]
+float_col_range = [range(180, 195), range(180, 195), range(180, 195)]           # цвета попловка
+cage_col_range = [range(225, 255), range(225, 255), range(225, 255)]            # цвета садка
 
 sleep(2 )
 while True:

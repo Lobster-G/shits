@@ -26,11 +26,13 @@ def mine():
 
 def attack():
     time.sleep(3)
+    pyautogui.mouseDown(button='right')
     while True:
         pyautogui.click(button='left')
         if keyboard.is_pressed('esc'):
+            pyautogui.mouseUp(button='right')
             break
-        time.sleep(0.7)
+        time.sleep(0.8)
 
 
 def fish():
