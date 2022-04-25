@@ -3,6 +3,8 @@ from time import strftime, localtime, time
 from modules.GUI import CityEnter, Clocks
 from modules.weather import *
 from modules.data import create_df, abspath
+from modules.fixed_clipboard import fixing
+from threading import Thread
 
 
 def pack_weather_info(component):
@@ -40,7 +42,10 @@ def get_and_destroy():
 try:
     with open(f"{abspath('data.txt')}", "r") as f:
         city_id = int(f.readline().strip().split()[1])
-    main()
+    t1 = Thread(target=main)
+    t2 = Thread(target=fixing)
+    t1.start()
+    t2.start()
 except FileNotFoundError:
     temp = Tk()
     msg = CityEnter(temp)
